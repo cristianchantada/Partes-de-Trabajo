@@ -1,13 +1,9 @@
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Parte implements Serializable {
 
+    private String descripcion;
     private Date fecha;
     private String observaciones;
     private String estado;
@@ -18,33 +14,34 @@ public class Parte implements Serializable {
     private Material material; //opcional
     private Localizacion localizacion;
 
-    public Parte(){}
+    public Parte() {
+    }
 
-    public Parte(Date fecha, String estado){
+    public Parte(Date fecha, String estado) {
         this.fecha = fecha;
         this.estado = estado;
     }
 
-    public Parte(Date fecha, String estado, String observaciones){
+    public Parte(Date fecha, String estado, String observaciones) {
         this(fecha, estado);
     }
 
-    public Parte (Date fecha, String estado, String observaciones, Empleado empleado){
+    public Parte(Date fecha, String estado, String observaciones, Empleado empleado) {
         this(fecha, estado, observaciones);
         this.empleado = empleado;
     }
 
-    public Parte (Date fecha, String estado, String observaciones, Empleado empleado, Localizacion localizacion){
+    public Parte(Date fecha, String estado, String observaciones, Empleado empleado, Localizacion localizacion) {
         this(fecha, estado, observaciones, empleado);
         this.localizacion = localizacion;
     }
 
-    public Parte (Date fecha, String estado, String observaciones, Empleado empleado, Localizacion localizacion, Cliente cliente){
+    public Parte(Date fecha, String estado, String observaciones, Empleado empleado, Localizacion localizacion, Cliente cliente) {
         this(fecha, estado, observaciones, empleado, localizacion);
         this.cliente = cliente;
     }
 
-    public Parte (Date fecha, String estado, String observaciones, Empleado empleado, Localizacion localizacion, Cliente cliente, Vehiculo vehiculo){
+    public Parte(Date fecha, String estado, String observaciones, Empleado empleado, Localizacion localizacion, Cliente cliente, Vehiculo vehiculo) {
         this(fecha, estado, observaciones, empleado, localizacion, cliente);
         this.vehiculo = vehiculo;
     }
@@ -121,7 +118,13 @@ public class Parte implements Serializable {
         this.localizacion = localizacion;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
     @Override
     public String toString() {
