@@ -12,8 +12,7 @@ import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class Marco extends JFrame {
 
@@ -124,9 +123,13 @@ public class Marco extends JFrame {
 
 
                 Date fechaFormat = formatearFecha(fecha);
+
                 Parte newParte = new Parte(fecha, cliente, empleado, vehiculo, servicio);
 
-
+                FicheroPartes ficheroPartes = new FicheroPartes();
+                List<Parte> listaPartes = ficheroPartes.consultarPartes();
+                listaPartes.add(newParte);
+                ficheroPartes.generarPartes(listaPartes);
 
 
 
