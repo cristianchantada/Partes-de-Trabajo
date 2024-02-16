@@ -9,6 +9,11 @@ import java.awt.event.FocusEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Marco extends JFrame {
 
@@ -112,10 +117,36 @@ public class Marco extends JFrame {
                 String nifEmpleado = textField_1.getText();
                 String matriculaVahiculo = textField_3.getText();
                 String descripcionServicio = textField_4.getText();
+                String fecha = textField_4.getText();
+
+                // Que cada uno se busque la vida para pasar al constructor de Parte: Cliente,
+                // Empleado, Vehiculo y Servicio
+
+
+                Date fechaFormat = formatearFecha(fecha);
+                Parte newParte = new Parte(fecha, cliente, empleado, vehiculo, servicio);
+
+
+
+
 
             }
         });
         btnNewButton.setBounds(175, 215, 89, 23);
         contentPane.add(btnNewButton);
     }
+
+
+    public Date formatearFecha(String fechaString){
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = null;
+        try {
+            fecha = formatoFecha.parse(fechaString);
+            System.out.println("Fecha parseada: " + fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return fecha;
+    }
+
 }

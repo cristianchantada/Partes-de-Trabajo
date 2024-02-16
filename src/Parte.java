@@ -6,7 +6,7 @@ public class Parte implements Serializable {
     private String descripcion;
     private Date fecha;
     private String observaciones;
-    private String estado;
+    private EstadoParte estado = EstadoParte.EN_PROCESO;
     private Cliente cliente;
     private Empleado empleado;
     private Vehiculo vehiculo; //opcional
@@ -17,33 +17,27 @@ public class Parte implements Serializable {
     public Parte() {
     }
 
-    public Parte(Date fecha, String estado) {
+    public Parte(Date fecha, Cliente cliente, Empleado empleado, Vehiculo vehiculo, Servicio servicio) {
+        this();
         this.fecha = fecha;
-        this.estado = estado;
-    }
-
-    public Parte(Date fecha, String estado, String observaciones) {
-        this(fecha, estado);
-    }
-
-    public Parte(Date fecha, String estado, String observaciones, Empleado empleado) {
-        this(fecha, estado, observaciones);
+        this.cliente = cliente;
         this.empleado = empleado;
+        this.vehiculo = vehiculo;
+        this.servicio = servicio;
     }
 
-    public Parte(Date fecha, String estado, String observaciones, Empleado empleado, Localizacion localizacion) {
-        this(fecha, estado, observaciones, empleado);
+    public Parte(Date fecha, Cliente cliente, Empleado empleado, Vehiculo vehiculo, Servicio servicio, Material material){
+        this(fecha, cliente, empleado, vehiculo, servicio);
+        this.material = material;
+    }
+    public Parte(Date fecha, Cliente cliente, Empleado empleado, Vehiculo vehiculo, Servicio servicio, Localizacion localizacion){
+        this(fecha, cliente, empleado, vehiculo, servicio);
         this.localizacion = localizacion;
     }
 
-    public Parte(Date fecha, String estado, String observaciones, Empleado empleado, Localizacion localizacion, Cliente cliente) {
-        this(fecha, estado, observaciones, empleado, localizacion);
-        this.cliente = cliente;
-    }
-
-    public Parte(Date fecha, String estado, String observaciones, Empleado empleado, Localizacion localizacion, Cliente cliente, Vehiculo vehiculo) {
-        this(fecha, estado, observaciones, empleado, localizacion, cliente);
-        this.vehiculo = vehiculo;
+    public Parte(Date fecha, Cliente cliente, Empleado empleado, Vehiculo vehiculo, Servicio servicio, Material material, Localizacion localizacion){
+        this(fecha, cliente, empleado, vehiculo, servicio, material);
+        this.localizacion = localizacion;
     }
 
     public Date getFecha() {
@@ -62,11 +56,11 @@ public class Parte implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public String getEstado() {
+    public EstadoParte getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoParte estado) {
         this.estado = estado;
     }
 

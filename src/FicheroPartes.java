@@ -43,7 +43,6 @@ public class FicheroPartes {
             System.out.println("Ha ocurrido un error: " + e.getMessage());
             e.printStackTrace();
         }
-
         return partes;
     }
 
