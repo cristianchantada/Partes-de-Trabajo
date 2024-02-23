@@ -6,9 +6,18 @@ public class Servicio implements Serializable {
     private String desc;
     private Time he;
     private Time hs;
-    private Date fecha;
+    private Date fecha = new Date();
 
-    public Servicio() {
+    public Servicio() {}
+
+    public Servicio(String desc){
+        this();
+        this.desc = desc;
+    }
+
+    public Servicio(String desc, Date fecha){
+        this(desc);
+        this.fecha = fecha;
     }
 
     public Servicio(String desc, Time he, Time hs, Date fecha) {

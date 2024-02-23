@@ -9,6 +9,16 @@ public class Empleado implements Serializable {
     String codigo;
     Date fecha;
 
+    public Empleado(){}
+
+    public Empleado(String nif, String nombre, String correo, String telefono){
+        this();
+        this.nif = nif;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.telefono = telefono;
+    }
+
     public String getNif() {
         return nif;
     }

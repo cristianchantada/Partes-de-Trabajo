@@ -14,7 +14,7 @@ public class FicheroPartes {
     }
 
     public void generarPartes(List<Parte> partes) {
-        try (ObjectOutputStream ficheroPartes = new ObjectOutputStream(new FileOutputStream("/model/partes.dat"))) {
+        try (ObjectOutputStream ficheroPartes = new ObjectOutputStream(new FileOutputStream("C:\\DAW\\Programación\\Java2Evaluacion\\PartesDeTrabajo\\src\\model\\partes.dat"))) {
             for (Parte parte : partes) {
                 ficheroPartes.writeObject(parte);
             }
@@ -26,7 +26,7 @@ public class FicheroPartes {
 
     public List<Parte> consultarPartes() {
         List<Parte> partes = new ArrayList<>();
-        try (ObjectInputStream ficheroPartes = new ObjectInputStream(new FileInputStream("/model/partes.dat"))) {
+        try (ObjectInputStream ficheroPartes = new ObjectInputStream(new FileInputStream("C:\\DAW\\Programación\\Java2Evaluacion\\PartesDeTrabajo\\src\\model\\partes.dat"))) {
             while (true) {
                 Parte parte = (Parte) ficheroPartes.readObject();
                 partes.add(parte);
