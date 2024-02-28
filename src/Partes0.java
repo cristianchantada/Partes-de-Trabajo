@@ -14,108 +14,109 @@ import java.util.ArrayList;
 
 public class Partes0 extends JFrame {
 
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
-    private static JTextField txtCliente;
-    private JTextField Obra;
-    private JLabel lblFecha;
-    private JLabel lblNewLabel_2;
-    private JTextField textField_1;
-    public Cliente c;
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private static JTextField txtCliente;
+	private JTextField Obra;
+	private JLabel lblFecha;
+	private JLabel lblNewLabel_2;
+	private JTextField textField_1;
+	public Cliente c;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Partes0 frame = new Partes0();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Partes0 frame = new Partes0();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-    public Partes0() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(10, 10, 800, 600);
-        contentPane = new JPanel();
-        contentPane.setAlignmentY(0.1f);
-        contentPane.setAlignmentX(0.1f);
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	public Partes0() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(10, 10, 800, 600);
+		contentPane = new JPanel();
+		contentPane.setAlignmentY(0.1f);
+		contentPane.setAlignmentX(0.1f);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 
-        JButton btnNewButton = new JButton("Alta Parte");
-        btnNewButton.setBounds(680, 520, 90, 30);
-        contentPane.add(btnNewButton);
+		JButton btnNewButton = new JButton("Alta Parte");
+		btnNewButton.setBounds(680, 520, 90, 30);
+		contentPane.add(btnNewButton);
 
-        JLabel lblNewLabel = new JLabel("Cliente:");
-        lblNewLabel.setBounds(10, 11, 46, 14);
-        contentPane.add(lblNewLabel);
+		JLabel lblNewLabel = new JLabel("Cliente:");
+		lblNewLabel.setBounds(10, 11, 46, 14);
+		contentPane.add(lblNewLabel);
 
-        txtCliente = new JTextField();
-        txtCliente.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                Cliente c=new Cliente(txtCliente.getText(),"","","");
+		txtCliente = new JTextField();
+		txtCliente.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Cliente c = new Cliente(txtCliente.getText(), "", "", "");
 
-                List <Cliente> lc = new ArrayList<>();
-                lc=FicheroCliente.leerFichero();
-                if (Cliente.clienteExiste(txtCliente.getText(),lc)) {
-                    verMensaje("El cliente existe");
-                    ClienteJFrame cjf = new ClienteJFrame(lc);
-                    cjf.setNifInInput(txtCliente.getText());
-                    cjf.setVisible(true);
-                } else {
-                    c=new Cliente();
+				ArrayList<Cliente> lc = new ArrayList<>();
+				lc = (ArrayList<Cliente>) FicheroCliente.leerFichero();
+				if (Cliente.clienteExiste(txtCliente.getText(), lc)) {
+					verMensaje("El cliente existe");
+					ClienteJFrame cjf = new ClienteJFrame(lc);
+					cjf.setNifInInput(txtCliente.getText());
+					cjf.setVisible(true);
+				} else {
+					c = new Cliente();
+					txtCliente.setText(c.getNif());
+					ClienteJFrame JFdeCliente = new ClienteJFrame();
+					JFdeCliente.setVisible(true);
+				}
+			}
+		});
 
-                    txtCliente.setText(c.getNif());
-                }
-            }
-        });
-        
-        txtCliente.setBounds(86, 5, 300, 20);
-        contentPane.add(txtCliente);
-        txtCliente.setColumns(10);
+		txtCliente.setBounds(86, 5, 300, 20);
+		contentPane.add(txtCliente);
+		txtCliente.setColumns(10);
 
-        JLabel lblNewLabel_1 = new JLabel("Obra:");
-        lblNewLabel_1.setBounds(10, 36, 46, 14);
-        contentPane.add(lblNewLabel_1);
+		JLabel lblNewLabel_1 = new JLabel("Obra:");
+		lblNewLabel_1.setBounds(10, 36, 46, 14);
+		contentPane.add(lblNewLabel_1);
 
-        Obra = new JTextField();
-        Obra.setColumns(10);
-        Obra.setBounds(86, 33, 300, 20);
-        contentPane.add(Obra);
+		Obra = new JTextField();
+		Obra.setColumns(10);
+		Obra.setBounds(86, 33, 300, 20);
+		contentPane.add(Obra);
 
-        lblFecha = new JLabel("Fecha:");
-        lblFecha.setBounds(430, 11, 46, 14);
-        contentPane.add(lblFecha);
+		lblFecha = new JLabel("Fecha:");
+		lblFecha.setBounds(430, 11, 46, 14);
+		contentPane.add(lblFecha);
 
-        lblNewLabel_2 = new JLabel("Empleado:");
-        lblNewLabel_2.setBounds(10, 67, 64, 14);
-        contentPane.add(lblNewLabel_2);
+		lblNewLabel_2 = new JLabel("Empleado:");
+		lblNewLabel_2.setBounds(10, 67, 64, 14);
+		contentPane.add(lblNewLabel_2);
 
-        textField_1 = new JTextField();
-        textField_1.setColumns(10);
-        textField_1.setBounds(86, 61, 300, 20);
-        contentPane.add(textField_1);
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(86, 61, 300, 20);
+		contentPane.add(textField_1);
 
-        JDateChooser dateFecha = new JDateChooser();
-        dateFecha.setBounds(475, 5, 152, 20);
-        contentPane.add(dateFecha);
-    }
+		JDateChooser dateFecha = new JDateChooser();
+		dateFecha.setBounds(475, 5, 152, 20);
+		contentPane.add(dateFecha);
+	}
 
-    public static String pedirCliente() {
-        String s = JOptionPane.showInputDialog("Introduce el cliente:");
-        verMensaje("Si el cliente existe paso al siguiente campo\n"+
-                "si no existe hago que salte panel de alta cliente");
-        return s;
-    }
+	public static String pedirCliente() {
+		String s = JOptionPane.showInputDialog("Introduce el cliente:");
+		verMensaje(
+				"Si el cliente existe paso al siguiente campo\n" + "si no existe hago que salte panel de alta cliente");
+		return s;
+	}
 
-    static void verMensaje(String mensaje) {
-        JOptionPane.showMessageDialog(null, mensaje);
-    }
-    
+	static void verMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje);
+	}
+
 }

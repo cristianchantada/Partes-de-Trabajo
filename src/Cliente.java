@@ -32,8 +32,11 @@ public class Cliente implements Serializable {
 	}
 
 	public static boolean clienteExiste(String nif,List<Cliente> lc ) {
-		for(Cliente c:lc ) {
-			if(nif.equals(c.nif)) return true;
+		if(lc != null) {
+			for(Cliente c:lc ) {
+				if(nif.equals(c.nif)) return true;
+			}
+			return false;
 		}
 		return false;
 	}
