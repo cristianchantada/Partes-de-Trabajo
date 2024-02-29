@@ -1,4 +1,6 @@
+package com.cristian.partes;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente implements Serializable {

@@ -12,7 +12,7 @@ import com.toedter.calendar.JDateChooser;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Partes0 extends JFrame {
+public class PartesMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -27,7 +27,7 @@ public class Partes0 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Partes0 frame = new Partes0();
+					PartesMain frame = new PartesMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +36,7 @@ public class Partes0 extends JFrame {
 		});
 	}
 
-	public Partes0() {
+	public PartesMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(10, 10, 800, 600);
 		contentPane = new JPanel();
@@ -49,6 +49,7 @@ public class Partes0 extends JFrame {
 
 		JButton btnNewButton = new JButton("Alta Parte");
 		btnNewButton.setBounds(680, 520, 90, 30);
+		btnNewButton.setEnabled(false);
 		contentPane.add(btnNewButton);
 
 		JLabel lblNewLabel = new JLabel("Cliente:");
@@ -65,14 +66,23 @@ public class Partes0 extends JFrame {
 				lc = (ArrayList<Cliente>) FicheroCliente.leerFichero();
 				if (Cliente.clienteExiste(txtCliente.getText(), lc)) {
 					verMensaje("El cliente existe");
+					btnNewButton.setEnabled(false);
 					ClienteJFrame cjf = new ClienteJFrame(lc);
 					cjf.setNifInInput(txtCliente.getText());
 					cjf.setVisible(true);
 				} else {
-					c = new Cliente();
-					txtCliente.setText(c.getNif());
-					ClienteJFrame JFdeCliente = new ClienteJFrame();
-					JFdeCliente.setVisible(true);
+					if (!Cliente.validateNifAlgorithm(txtCliente.getText())) {
+						verMensaje("El NIF introducido no es válido, por favor, vuelva a intentarlo");
+						txtCliente.setText("");
+						txtCliente.requestFocus();
+					} else {
+						Cliente client = new Cliente(txtCliente.getText());
+						ClienteJFrame JfDeCliente = new ClienteJFrame(client);
+						
+						System.out.println("Nif en Partes 0 = "  + txtCliente.getText());
+
+						JfDeCliente.setVisible(true);
+					}
 				}
 			}
 		});
@@ -115,7 +125,7 @@ public class Partes0 extends JFrame {
 		return s;
 	}
 
-	static void verMensaje(String mensaje) {
+	public static void verMensaje(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje);
 	}
 

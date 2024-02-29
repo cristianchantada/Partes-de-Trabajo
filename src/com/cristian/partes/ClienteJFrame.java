@@ -1,20 +1,14 @@
-import java.awt.EventQueue;
-
+package com.cristian.partes;
+import static com.cristian.partes.Validator.*;
+import static com.cristian.partes.PartesMain.verMensaje;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -28,25 +22,6 @@ public class ClienteJFrame extends JFrame {
 	private JTextField phoneInput;
 	private List<Cliente> listaClientes;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ClienteJFrame frame = new ClienteJFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
 	public ClienteJFrame(Cliente c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 459, 329);
@@ -60,10 +35,6 @@ public class ClienteJFrame extends JFrame {
 		nifInput.setBounds(193, 29, 203, 20);
 		nifInput.setColumns(10);
 		nifInput.setText(c.getNif());
-		
-		
-		System.out.println("NifCliente en JFrameCliente = " + c.getNif());
-		
 		
 		nifInput.setEnabled(false);
 		contentPane.add(nifInput);
@@ -127,52 +98,24 @@ public class ClienteJFrame extends JFrame {
 		String email = emailInput.getText();
 		String phone = phoneInput.getText();
 
-		if(!Validator.nifValidator(nif)) {
-			nifInput.setText("");
-		}
-
-
-
-
 		boolean checker = true;
-		
-		if (!nifMatcher.matches()) {
-			message = "Su DNI no contiene un formato válido, por favor, inténtelo de nuevo";
-			JOptionPane.showMessageDialog(null, message);
-			System.out.println(message);
+		if(!nifValidator(nif)) {
 			nifInput.setText("");
 			checker = false;
-		} else {
-			if (!validateNifAlgorithm(nif)) {
-				message = "Su NIF no contiene un formato válido, por favor, inténtelo de nuevo";
-				JOptionPane.showMessageDialog(null, message);
-				System.out.println(message);
-				nifInput.setText("");
-				checker = false;
-			}
 		}
-
-		// Lógica de validación del email;
-		if (!emailMatcher.matches()) {
-			message = "Su EMAIL no contiene un formato válido, por favor, inténtelo de nuevo";
-			JOptionPane.showMessageDialog(null, message);
-			System.out.println(message);
+		
+		if(!emailValidator(email)){
 			emailInput.setText("");
 			checker = false;
 		}
 
-		// Lógica de validación del teléfono.
-		if (!phoneMatcher.matches()) {
-			message = "Su TELÉFONO no contiene un formato válido, por favor, inténtelo de nuevo";
-			JOptionPane.showMessageDialog(null, message);
-			System.out.println(message);
+		if(!phoneValidator(phone)) {
 			checker = false;
 			phoneInput.setText("");
 		}
-		
+
 		if(name.isEmpty()) {
-			message = "El nombre del cliente no puede estar vacío, por favor, inténtelo de nuevo";
-			JOptionPane.showMessageDialog(null, message);
+			verMensaje("El nombre del cliente no puede estar vacío, por favor, inténtelo de nuevo");
 			checker = false;
 			nameInput.setText("");
 		}
@@ -183,15 +126,9 @@ public class ClienteJFrame extends JFrame {
 			lc = FicheroCliente.leerFichero();
 			lc.add(newClient);
 			FicheroCliente.crearFichero(lc);
-			showSimpleMessage(newClient.toString());
+			verMensaje(newClient.toString());
 			dispose();
 		}
 	}
-
-	public static void showSimpleMessage(String message) {
-		JOptionPane.showMessageDialog(null, message);
-	}
-
-
 
 }
