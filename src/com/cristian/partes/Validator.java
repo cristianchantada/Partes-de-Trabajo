@@ -28,12 +28,10 @@ public class Validator {
 				return false;
 			}
 		}
-
 		return true;
 	}
 
 	public static boolean emailValidator(String email) {
-
 		String emailRegex = "^[\\w\\.-]+@[a-zA-Z\\d\\.-]+\\.[a-zA-Z]{2,}$";
 		Pattern emailPattern = Pattern.compile(emailRegex);
 		Matcher emailMatcher = emailPattern.matcher(email);
@@ -42,11 +40,9 @@ public class Validator {
 	}
 
 	public static boolean phoneValidator(String phone) {
-
 		String phoneRegex = "\\d{9}";
 		Pattern phonePattern = Pattern.compile(phoneRegex);
 		Matcher phoneMatcher = phonePattern.matcher(phone);
-
 		return true;
 	}
 
@@ -94,5 +90,17 @@ public class Validator {
 			return false;
 		}
 	}
+	
+    public static boolean validarNombre(String nombre) {
+        Pattern pattern = Pattern.compile("^[a-zA-Z ]+$");
+        Matcher matcher = pattern.matcher(nombre);
+        return matcher.matches();
+    }
+    
+    public static boolean validarCodigoOperario(String codigoOperario) {
+        Pattern pattern = Pattern.compile("OP\\d{4}");
+        Matcher matcher = pattern.matcher(codigoOperario);
+        return matcher.matches();
+    }
 
 }

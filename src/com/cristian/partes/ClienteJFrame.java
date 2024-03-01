@@ -20,7 +20,6 @@ public class ClienteJFrame extends JFrame {
 	private JTextField nifInput;
 	private JTextField nameInput;
 	private JTextField phoneInput;
-	private List<Cliente> listaClientes;
 
 	public ClienteJFrame(Cliente c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,10 +81,6 @@ public class ClienteJFrame extends JFrame {
 		contentPane.add(createClientButton);
 	}
 
-	public ClienteJFrame(List<Cliente> listaClientes) {
-		this.listaClientes = listaClientes;
-	}
-
 	public void setNifInInput(String nif) {
 		nifInput.setText(nif);
 		nifInput.setEnabled(false);
@@ -114,8 +109,8 @@ public class ClienteJFrame extends JFrame {
 			phoneInput.setText("");
 		}
 
-		if(name.isEmpty()) {
-			verMensaje("El nombre del cliente no puede estar vacío, por favor, inténtelo de nuevo");
+		if(validarNombre(name)) {
+			verMensaje("El nombre del cliente no es válido, por favor, inténtelo de nuevo");
 			checker = false;
 			nameInput.setText("");
 		}
