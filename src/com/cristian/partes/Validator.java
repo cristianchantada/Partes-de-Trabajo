@@ -1,4 +1,5 @@
 package com.cristian.partes;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -16,15 +17,11 @@ public class Validator {
 			message = "Su DNI no contiene un formato válido, por favor, inténtelo de nuevo";
 			PartesMain.verMensaje(message);
 			JOptionPane.showMessageDialog(null, message);
-			System.out.println(message);
-
 			return false;
 		} else {
 			if (!validateNifAlgorithm(nif)) {
 				message = "Su NIF no contiene un formato válido, por favor, inténtelo de nuevo";
 				JOptionPane.showMessageDialog(null, message);
-				System.out.println(message);
-
 				return false;
 			}
 		}
@@ -73,34 +70,26 @@ public class Validator {
 			Integer number = Integer.parseInt(nif.substring(0, 8));
 			int rest = number % 23;
 
-			System.out.println("Letra del DNI es : " + upperLetter);
-			System.out.println("El número del DNI es: " + number);
-			System.out.println("El resto de dividir " + number + " entre 23 es " + rest);
-
 			if (lettersTable[rest].equals(upperLetter)) {
-				System.out.println("El DNI supera la prueba : " + lettersTable[rest] + " == " + upperLetter);
 				return true;
 			} else {
-				System.out.println("El DNI no supera la prueba de su algoritmo: ");
-				System.out.println(lettersTable[rest] + " y " + upperLetter + " son dstintas");
 				return false;
 			}
 		} else {
-			System.out.println("El campo DNI ha llegado vacío al checkeo con algoritmo DNI");
 			return false;
 		}
 	}
-	
-    public static boolean validarNombre(String nombre) {
-        Pattern pattern = Pattern.compile("^[a-zA-Z ]+$");
-        Matcher matcher = pattern.matcher(nombre);
-        return matcher.matches();
-    }
-    
-    public static boolean validarCodigoOperario(String codigoOperario) {
-        Pattern pattern = Pattern.compile("OP\\d{4}");
-        Matcher matcher = pattern.matcher(codigoOperario);
-        return matcher.matches();
-    }
+
+	public static boolean validarNombre(String nombre) {
+		Pattern pattern = Pattern.compile("^[a-zA-ZÁÉÍÓÚÜáéíóúüÑñ\s]*$");
+		Matcher matcher = pattern.matcher(nombre);
+		return matcher.matches();
+	}
+
+	public static boolean validarCodigoOperario(String codigoOperario) {
+		Pattern pattern = Pattern.compile("OP\\d{4}");
+		Matcher matcher = pattern.matcher(codigoOperario);
+		return matcher.matches();
+	}
 
 }

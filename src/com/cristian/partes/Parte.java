@@ -15,8 +15,7 @@ public class Parte implements Serializable {
     private Material material; //opcional
     private Localizacion localizacion;
 
-    public Parte() {
-    }
+    public Parte() {}
 
     public Parte(Date fecha, Cliente cliente, Empleado empleado, Vehiculo vehiculo, Servicio servicio) {
         this();

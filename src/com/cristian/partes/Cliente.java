@@ -27,6 +27,11 @@ public class Cliente implements Serializable {
 		return nif;
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "El cliente ha sido creado con los siguientes datos:"

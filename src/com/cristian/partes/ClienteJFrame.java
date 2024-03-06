@@ -109,7 +109,7 @@ public class ClienteJFrame extends JFrame {
 			phoneInput.setText("");
 		}
 
-		if(validarNombre(name)) {
+		if(!validarNombre(name)) {
 			verMensaje("El nombre del cliente no es válido, por favor, inténtelo de nuevo");
 			checker = false;
 			nameInput.setText("");
